@@ -2,6 +2,17 @@
 <!doctype html>
 <html class="no-js no-touch" lang="{{ shop.locale }}">
 <head>
+  {% render 'appco-header-file' %}
+  {% render 'font-css' %}
+  {% if template contains "index" %}
+  	{% render "index-css" %}
+  {% elsif template contains "collection" %}
+  	{% render "collection-css" %}
+  {% elsif template contains "product" %}
+  	{% render "product-css" %}
+  {% else %}
+  	{% render "critical-css" %}
+  {% endif %}
   <script>
     window.Store = window.Store || {};
     window.Store.id = {{ shop.id }};
@@ -38,12 +49,6 @@
   <link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
   <link rel="preconnect" href="https://ajax.googleapis.com">
 
-  <!-- Preloads -->
-  <!-- Preload CSS -->
-  <link rel="preload" href="{{ 'fancybox.css' | asset_url }}" as="style">
-  <link rel="preload" href="{{ 'styles.css' | asset_url }}" as="style">
-  <link rel="preload" href="{{ 'jadepuma.css' | asset_url }}" as="style">
-
   <!-- Preload JS -->
   <link rel="preload" href="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" as="script">
   <link rel="preload" href="{{ 'vendors.js' | asset_url }}" as="script">
@@ -72,9 +77,9 @@
   {% endif %}
 
   <!-- CSS for Flex -->
-  <link rel="stylesheet" href="{{ 'fancybox.css' | asset_url }}">
-  <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
-  <link rel="stylesheet" href="{{ 'jadepuma.css' | asset_url }}">
+  <link rel="stylesheet" data-href="{{ 'fancybox.css' | asset_url }}">
+  <link rel="stylesheet" data-href="{{ 'styles.css' | asset_url }}">
+  <link rel="stylesheet" data-href="{{ 'jadepuma.css' | asset_url }}">
   
   {% comment %}Inject theme-object begin{% endcomment %}
   <script>
@@ -152,13 +157,13 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ 'favicon.png' | asset_url }}">
   {%- endif -%}
 
-  {% if template.name == 'collection' %}
-    {% assign content_for_header = content_for_header | remove: 'admin.revenuehunt.com' %}
-    {{ content_for_header }}    
-  {% else %}
-    {{ content_for_header }}
-  {% endif %}
-  
+     {%- if request.design_mode or template contains 'cart' or template contains 'checkout' -%}
+            {{ content_for_header }}
+    {%- else -%}
+            {% capture content_for_header2 %}{{ content_for_header }}{% endcapture %}
+            {{ content_for_header2 | replace: ' defer="defer" ', ' type="lazyload_js" ' | replace: " src=", " data-src="| replace: "DOMContentLoaded", "appco-DOMContentLoaded" | replace: "window.addEventListener('load', asyncLoad, false);", "window.addEventListener('appco-DOMContentLoaded', asyncLoad, false);" | replace: "addEventListener('load', prefetchAssets);", "addEventListener('appco-DOMContentLoaded', prefetchAssets);" }}
+            <script>var trekkie=[];trekkie.integrations=!0;window.BOOMR={},window.BOOMR.version=true;</script>
+    {%- endif -%}
 
 
   {% render 'social-meta-info' %}
@@ -187,14 +192,17 @@
 <link rel="alternate" hreflang="fr" href="https://fr.{{ full_url }}">
 <link rel="alternate" hreflang="es" href="https://es.{{ full_url }}">
 <link rel="alternate" hreflang="it" href="https://it.{{ full_url }}">
-<script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
-<script>
+<script type="lazyload_js" data-src="https://cdn.weglot.com/weglot.min.js"></script>
+<script type="lazyload_js">
     Weglot.initialize({
         api_key: 'wg_0124d6440ae7d07bb2bae7a8ca8fd7d31'
     });
 </script>
-  <script>(function(d){var e=d.createElement('script');e.src='https://td.yieldify.com/yieldify/code.js?w_uuid=32e1b4fa-9637-4855-8069-32bf4e5bd111&k=1';e.async=true;d.getElementsByTagName('head')[0].appendChild(e);}(document));</script>
-</head>
+  <script type="lazyload_js">(function(d){var e=d.createElement('script');e.src='https://td.yieldify.com/yieldify/code.js?w_uuid=32e1b4fa-9637-4855-8069-32bf4e5bd111&k=1';e.async=true;d.getElementsByTagName('head')[0].appendChild(e);}(document));</script>
+  {% render 'custom-css' %}
+  {% render 'app-block' %} 
+  
+  </head>
 
 {%- capture money_format_output -%}
   {%- if settings.currency_format == 'money_with_currency_format' -%}
@@ -365,6 +373,10 @@
   <div id="vitals-currency_converter"></div>
 
 {% render 'rebuy-smartcart-extensions' %}
+
+
+  {% render 'appco-footer-file' %}
+  {% render 'footer-app-block' %}
 </body>
 </html>
 {% endcapture %}

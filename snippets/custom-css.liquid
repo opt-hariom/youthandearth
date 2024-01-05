@@ -1,0 +1,182 @@
+<style>
+@font-face {
+    font-family: flex-icon;
+    src: url('https://youthandearth.com/cdn/shop/t/103/assets/flex-icon.ttf?v=141001306366886470981701183347') format("truetype"), url('https://youthandearth.com/cdn/shop/t/103/assets/flex-icon.woff?v=65562972783189949211701183347') format("woff"), url('https://youthandearth.com/cdn/shop/t/103/assets/flex-icon.svg?v=122155750794120575381701183347') format("svg");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+.transition--fade-in {
+    opacity: 1 !important;
+}
+
+.image-slideshow {
+    opacity: 1 !important;
+}
+
+.image-slideshow--fade .image-slideshow__slide {
+    opacity: 1!important;
+    transition: opacity 1s!important;
+}
+
+.slideshow-classic:not(.flickity-enabled) .image-slideshow__slide:nth-child(n+2){
+    display:none;
+}
+
+.product-gallery__main {
+    opacity: 1 !important;
+}
+
+.js .faceted-filter-group-display__list-submit {
+    display: none;
+}
+
+.product .product-gallery__main:not(.flickity-enabled ) .product-gallery__image:nth-child(1){
+    visibility: visible !important;
+}
+.product-template:not(.product-template--image-scroll) .product-gallery .product-gallery__image.is-selected {
+    visibility: visible;
+}
+.product .product-gallery__main .flickity-button {
+    position: absolute;
+    background: hsla(0, 0%, 100%, 0.75);
+    border: none;
+    color: #333;
+}
+.product-gallery__thumbnails--bottom-thumbnails {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.product .product-gallery__thumbnails .flickity-viewport {
+    width: 100%;
+}
+.product .product-gallery__thumbnails  .flickity-viewport {
+    overflow: hidden;
+}
+.product .product-gallery__main .flickity-viewport {
+    overflow: hidden;
+}
+.flickity-button {
+    position: absolute;
+}
+@media(min-width:1200px){
+  .header__dropdown--below-parent > .navbar-item.header__item:nth-child(1) > label > a {
+    padding-right: 35px;
+}
+  .index .industry-badge_image {
+    min-width: 96px;
+}
+  .header__logo  img {
+    max-height: 20.5px;
+}
+.index .slideshow-classic:not(.flickity-enabled) .slideshow-classic-container .caption {
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0px;
+    right: 0px;
+    box-sizing: content-box;
+}
+
+.index .slideshow-classic:not(.flickity-enabled) .custom-image-element__wrap.image-element__wrap img {
+    aspect-ratio: 1903/634;
+}
+  div#language-switcher {
+    min-width: 57px;
+}
+
+#vitals-currency_converter {
+    min-width: 95px;
+}
+.collection .product__grid-item  .product-image__wrapper img {
+    aspect-ratio: 240/319;
+    width: 100%;
+}
+.collection .product__grid-item .image__container {
+    width: 100%;
+}
+.product  .product-gallery__main:not(.flickity-enabled )  .product-gallery__image:nth-child(n+2) {
+    display: none;
+}
+
+.product .product-gallery__thumbnails:not(.flickity-enabled) .product-gallery__thumbnail:nth-child(n+4) {
+    display: none;
+}
+
+.product .product-gallery__thumbnails:not(.flickity-enabled) {
+    display: flex;
+    justify-content: center;
+  column-gap:15px;
+    margin-top: 20px;
+}
+}
+
+@media(max-width:767px){
+.product  .product-gallery__main:not(.flickity-enabled )  .product-gallery__image:nth-child(n+2) {
+    display: none;
+}
+
+.product .product-gallery__thumbnails:not(.flickity-enabled) .product-gallery__thumbnail:nth-child(n+4) {
+    display: none;
+}
+
+.product .product-gallery__thumbnails:not(.flickity-enabled) {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 60px;
+}
+  .mobile-header__logo img {
+    max-height: 18px;
+}
+.collection .product__grid-item  .product-image__wrapper img {
+    aspect-ratio: 148/197;
+    width: 100%;
+}
+.collection .product__grid-item .image__container {
+    width: 100%;
+}
+}
+
+@media(max-width:499px){
+.product .flickity-prev-next-button.previous {
+    left: 10px;
+}
+
+.product .flickity-prev-next-button.next {
+    right: 10px;
+}
+
+.product .flickity-prev-next-button {
+    top: 50%;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+.product .flickity-enabled {
+    position: relative;
+}
+
+.product .flickity-button:disabled {
+    opacity: 0.3;
+    cursor: auto;
+    pointer-events: none;
+}
+ html:not(.jsload) .product .product-gallery{
+    aspect-ratio:336/580;
+   width:100%;
+  }
+  .index .dynamic-sections > .slideshow-section:nth-child(1) .image-slideshow:not(.flickity-enabled) {
+    aspect-ratio: 375/625;
+}
+}
+
+.summary-panel.size {
+    margin-top: 15px;
+}
+</style>
