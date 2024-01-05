@@ -1,0 +1,575 @@
+{% assign formatArray = product.metafields.jadepuma.format_options | split: ',' %}
+
+{% unless product.tags contains 'Bundles' %}
+
+  <div class="content1">
+    <div class="summary-panel">
+      <div class="panel-cell format">
+        <div class="icons">
+  <!-- Format: {{ product.metafields.jadepuma.format }} -->
+          {% if product.metafields.jadepuma.format == 'Capsules' %}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0469/8905/0019/files/icon-pill.png?v=1695846845"
+              alt="icon"
+              loading="lazy">
+          {% elsif product.metafields.jadepuma.format == 'Ketone' %}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0469/8905/0019/files/Capsule-icon.png?v=1695341783"
+              alt="icon"
+              loading="lazy">
+          {% elsif product.metafields.jadepuma.format == 'Liquid' %}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0469/8905/0019/files/icon-drop.png?v=1700064760"
+              alt="icon"
+              loading="lazy">
+          {% elsif product.metafields.jadepuma.format == 'Powder' %}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0469/8905/0019/files/icon-powder.png?v=1695846845"
+              alt="icon"
+              loading="lazy">
+          {% elsif product.metafields.jadepuma.format == 'Softgels' %}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0469/8905/0019/files/icon-softgell.png?v=1700064759"
+              alt="icon"
+              loading="lazy">
+          {% elsif product.metafields.jadepuma.format == 'Bundle' %}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0469/8905/0019/files/icon-bundle.png?v=1700064961"
+              alt="icon"
+              loading="lazy">
+          {% else %}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0469/8905/0019/files/icon-pill.png?v=1695846845"
+              alt="icon"
+              loading="lazy">
+          {% endif %}
+        </div>
+        {% if product.selected_or_first_available_variant.metafields.jadepuma.serving_size != blank %}
+          <div class="text serving-size-variant">{{ product.selected_or_first_available_variant.metafields.jadepuma.serving_size }}</div>
+        {% else %}
+          <div class="text serving-size-variant">{{ product.metafields.jadepuma.serving_size }}</div>
+        {% endif %}
+      </div>
+      <div class="panel-cell time">
+        <div class="icons">
+          {% if product.metafields.jadepuma.when_to_take == 'Evening' %}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0469/8905/0019/files/icon-evening.png?v=1695846751"
+              alt="icon"
+              loading="lazy">
+          {% elsif product.metafields.jadepuma.when_to_take == 'Anytime' %}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0469/8905/0019/files/icon-anytime.png?v=1695846751"
+              alt="icon"
+              loading="lazy">
+          {% elsif product.metafields.jadepuma.when_to_take == 'Before Bed' %}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0469/8905/0019/files/icon-before-bed.png?v=1695846751"
+              alt="icon"
+              loading="lazy">
+          {% elsif product.metafields.jadepuma.when_to_take == 'Morning' %}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0469/8905/0019/files/icon-Morning.png?v=1695846751"
+              alt="icon"
+              loading="lazy">
+          {% else %}
+            <img
+              src="https://cdn.shopify.com/s/files/1/0469/8905/0019/files/icon-Morning.png?v=1695846751"
+              alt="icon"
+              loading="lazy">
+          {% endif %}
+        </div>
+        <div class="text">{{ product.metafields.jadepuma.when_to_take }}</div>
+      </div>
+      <div class="panel-cell food">
+        <div class="text">{{ product.metafields.jadepuma.with_food }}</div>
+      </div>
+
+    </div>
+
+    {% assign productsArray = product.metafields.jadepuma.format_options.value %}
+
+    <div class="summary-panel format">
+      <div class="panel-cell format-box">
+        <div class="text">Type:
+
+          <div class="format-icon-container">
+            {% for p in productsArray %}
+
+
+              {% if p.id == product.id %}
+                {% assign format-icon-class = "selected-icon" %}
+              {% else %}
+                {% assign format-icon-class = "format-icon" %}
+              {% endif %}
+
+              {% assign title = p.title | downcase %}
+
+              {% if title contains 'powder' %}
+                <a
+                  href="{{ p.url }}"
+                  class="{{format-icon-class}} {% if p.available == false %} format_unavailable {% endif %}"
+                  title="Powder">
+                  {% render 'format-icons'
+                    , format: 'powder' %}
+                </a>
+              {% elsif title contains 'ml' %}
+                <a
+                  href="{{ p.url }}"
+                  class="{{format-icon-class}} {% if p.available == false %} format_unavailable {% endif %}"
+                  title="Liquid">
+                  {% render 'format-icons'
+                    , format: 'liquid' %}
+                </a>
+              {% elsif title contains 'capsule' %}
+                <a
+                  href="{{ p.url }}"
+                  class="{{format-icon-class}} {% if p.available == false %} format_unavailable {% endif %}"
+                  title="Capsules">
+                  {% render 'format-icons'
+                    , format: 'capsules' %}
+                </a>
+              {% elsif title contains 'soft' %}
+                <a
+                  href="{{ p.url }}"
+                  class="{{format-icon-class}} {% if p.available == false %} format_unavailable {% endif %}"
+                  title="Soft gel">
+                  {% render 'format-icons'
+                    , format: 'softgel' %}
+                </a>
+              {% endif %}
+
+            {% endfor %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    {% assign productFormat = product.metafields.jadepuma.format | downcase %}
+
+    {% assign productFormat = "" %}
+
+    <div class="summary-panel size">
+      <div class="panel-cell size-box">
+        {% if product.has_only_default_variant %}
+          <div class="text">Size: {{ product.metafields.jadepuma.contents_size }} {{ productFormat }}</div>
+        {% else %}
+
+
+          {% style %}
+
+        
+
+
+          {% endstyle %}
+
+
+
+
+          {% assign option_name = "Size" %}
+          {% if product.options.size == 1 %}
+            {% for option in product.options %}
+              {% assign option_name = option %}
+            {%- endfor %}
+          {%- endif %}
+
+          <script>
+
+            let variantInfo  = []
+
+            {% assign google_discount_value = 100 | minus: settings.google_discount_percentage | times: 0.01 %}
+      
+
+            {% for variant in product.variants %}
+               
+                  variantInfo.push({"index": {{forloop.index}},
+                                    "servingSize": "{{variant.metafields.jadepuma.serving_size}}",
+                                    "nrv" : `{{variant.metafields.jadepuma.nrv}}`,
+                                    "price" : "{{variant.price | money}}",
+                                    "comparePrice" : "{{variant.compare_at_price | money}}",
+                                    "subscriptionPrice" : "{{variant.price | times: 0.75 |  money}}",
+                                    "googleShoppingDiscountPrice" : "{{variant.price | times: google_discount_value |  money}}",
+                                    "variantID" : {{variant.id}}
+                                    })
+
+
+            {% endfor %}
+
+          </script>
+
+
+          <div class="text">{{ option_name }}:
+            {% for variant in product.variants %}
+
+
+              {% assign variantIndex = forloop.index | minus: 1 %}
+
+              {% if variant.available == false %}
+
+              {% endif %}
+
+              <div
+                class="sizeSwatch {% if forloop.index == 1 %}size-swatch-selected{% endif %}"
+                onclick="selectVariantClick({{variantIndex}})"
+                {% if variant.available == false %}
+                style="color:grey !important;"
+                {% endif %}>
+                {{ variant.title }}
+                {% unless productFormat == 'powder' %}
+                  {{ productFormat }}{% endunless %}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+
+  {% style %}
+
+    .sizeSwatch {
+      margin-left: 20px;
+      display: inline-block;
+      background-size: 5px 1px;
+      /* Width and height of the dot */
+      background-position: bottom;
+      background-repeat: repeat-x;
+      background-image: linear-gradient(to right, #000 50%, transparent 50%);
+      line-height: 16px;
+    }
+
+    @media only screen and (max-width: 798px) {
+      .sizeSwatch {
+        margin-left: 20px;
+        display: inline-block;
+        background-size: 5px 1px;
+        /* Width and height of the dot */
+        background-position: bottom;
+        background-repeat: repeat-x;
+        background-image: linear-gradient(to right, #000 50%, transparent 50%);
+        line-height: 16px;
+      }
+    }
+
+    .sizeSwatch:hover {
+      cursor: pointer;
+    }
+
+
+    .option-title{
+      visibility:hidden;
+    }
+
+    .variant-selection {
+      display:none;
+    }
+
+    .size-swatch-selected {
+      color: #fc4301;
+      background-image: none !important;
+    }
+
+    .black{
+      color:black !important;
+    }
+
+
+    .tooltip{
+      display:none !important;
+    }
+
+    .subscription-compare-at-price{
+      color: #fc4301 !important;
+    }
+
+  {% endstyle %}
+
+
+  {% if product.variants.size > 1 %}
+
+    <script>
+
+
+      var clickEvent = new MouseEvent('click', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true
+      });
+
+
+    $('.sizeSwatch').addClass('black')
+
+    setTimeout(()=>{
+
+
+     $('.product-gallery__thumbnail').css("display","none");
+      // Get all the radio inputs inside the div with the class 'swatch__options'
+      var swatch_radios = document.querySelectorAll('.swatch__options input[type="radio"]');
+
+      // Find the checked radio input and get its index
+      var checkedIndex = -1; // Default to -1 if none is checked
+      swatch_radios.forEach((radio, index) => {
+        if (radio.checked) {
+          checkedIndex = index;
+        }
+      });
+
+      selectVariantClick(checkedIndex)
+      $('.sizeSwatch').removeClass('black')
+
+      },1500)
+
+     
+      function selectVariantClick(index){
+
+        console.log(index)
+
+        if(document.querySelectorAll('.bsub-widget__group-header')[0]){
+          document.querySelectorAll('.bsub-widget__group-header')[0].click()   
+        }
+      
+        if(variantInfo[index].servingSize != ""){
+          $('.serving-size-variant').text(variantInfo[index].servingSize)
+        }
+
+        if(variantInfo[index].nrv != ""){
+          $('.nrv-variant').text(variantInfo[index].nrv)
+        }
+
+        let variantPrice = variantInfo[index].price;
+        let variantComparePrice = variantInfo[index].comparePrice;
+        let googleShoppingDiscountPrice = variantInfo[index].googleShoppingDiscountPrice;
+        //let variantSubscriptionPrice = variantInfo[index].subscriptionPrice;
+
+        document.querySelector('.no-subscription-price').innerHTML = variantPrice;
+        document.querySelector('.no-subscription-compare-at-price').innerHTML = variantComparePrice;
+
+
+
+        //updating the google shopping discounted prices when changing variant
+        document.querySelector('.no-subscription-price_google-shopping-discount-applied').innerHTML = googleShoppingDiscountPrice;
+        document.querySelector('.no-subscription-compare-at-price_google-shopping').innerHTML = variantPrice;
+        
+    
+
+
+            if(document.querySelector('.subscription-product-price')){
+
+              console.log(googleShoppingDiscountApplied)
+            
+
+
+              //changing subscription price with variants in subscription box
+          
+              setTimeout(()=>{
+
+              if(googleShoppingDiscountApplied){
+                document.querySelectorAll('.subscription-product-price')[0].innerHTML = googleShoppingDiscountPrice;
+                document.querySelectorAll('.subscription-compare-at-price')[0].innerHTML = variantPrice;
+              }else{
+                document.querySelectorAll('.subscription-product-price')[1].innerHTML = variantPrice;
+                document.querySelectorAll('.subscription-compare-at-price')[1].innerHTML = variantComparePrice;
+
+              }
+
+                document.querySelectorAll('.bsub-widget__group-header')[1].click()
+                let customSubPrice = document.querySelectorAll('[data-bsub-per-delivery-price]')[0].textContent
+                document.querySelectorAll('.bsub-widget__group-header')[0].click()
+                document.querySelector('.custom_display_sub_price').textContent = customSubPrice
+
+              },0)
+
+
+            }
+
+          let radios = document.querySelectorAll('input[type=radio][name=option-0]');
+
+          if (index == 0){
+            variantThumbnail_1 = 0;
+            variantThumbnail_2 = 1;
+            variantThumbnail_3 =  document.querySelectorAll('.product-gallery__thumbnail').length - 1;
+          }else{
+            variantThumbnail_1 =  (index * 2);
+            variantThumbnail_2 =  (index * 2) + 1;
+            variantThumbnail_3 =  document.querySelectorAll('.product-gallery__thumbnail').length - 1;
+            
+          }
+
+
+          var thumbnailsShow = [variantThumbnail_1, variantThumbnail_2,variantThumbnail_3 ]
+
+          setTimeout(()=>{
+
+            if(document.querySelectorAll('.product-gallery__thumbnail')[variantThumbnail_1]){
+              document.querySelectorAll('.product-gallery__thumbnail')[variantThumbnail_1].click()
+            }
+              $('.product-gallery__thumbnail').css("display","none");
+              document.querySelectorAll('.product-gallery__thumbnail').forEach((thumbnail,index)=>{
+          if(thumbnailsShow.includes(index)){
+            thumbnail.style.display = 'block';
+          }
+              })
+
+          },0)
+
+            radios[index].click();
+            radios[index].checked = true;
+
+            document.querySelectorAll('.sizeSwatch').forEach((item)=>{
+              item.classList.remove('size-swatch-selected')
+            })
+
+            document.querySelectorAll('.sizeSwatch')[index].classList.add('size-swatch-selected')
+  
+      }
+
+
+    </script>
+
+  {% endif %}
+
+  {% style %}
+
+
+    {% if  formatArray.size > 0 %}
+
+      .panel-cell.size-box {
+        border-radius: 0 0 8px 8px;
+        border-top: none;
+      }
+      .panel-cell.format-box {
+        border-radius: 8px 8px 0 0;
+      }
+      .summary-panel.size {
+        margin-top: 0;
+      }
+
+    {% else %}
+
+    .panel-cell.size-box {
+      border-radius: 8px 8px 8px 8px;
+      border-top: 1px solid black;
+    }
+    .summary-panel.format {
+      display: none;
+    }
+
+  {% endif %}
+
+
+  .selected-icon path {
+    stroke: #FC4301;
+  }
+
+  .selected-icon circle {
+    stroke: #FC4301;
+  }
+
+  .format-icon:hover path,
+  .format-icon:active path {
+    stroke: #FC4301;
+  }
+
+  .format-icon:hover circle,
+  .format-icon:active circle {
+    stroke: #FC4301;
+  }
+
+
+  .panel-cell.format-box {
+    position: relative;
+  }
+
+  .format-icon-container {
+    position: absolute;
+    left: 68px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: middle;
+  }
+
+  .format-icon-container a {
+    display: flex;
+    align-items: middle;
+    margin-right: 8px;
+
+  }
+
+
+  .summary-panel {
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    min-width: 495px;
+    height: 42px;
+    margin-top: 15px;
+  }
+
+  .panel-cell {
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    border: black 1px solid;
+    flex: 1 0 0;
+    padding: 0 12px;
+  }
+
+  .panel-cell.format {
+    border-radius: 8px 0 0 8px;
+  }
+  .panel-cell.food {
+    border-radius: 0 8px 8px 0;
+  }
+  .panel-cell.time {
+    border-right: none;
+    border-left: none;
+  }
+  .panel-cell .text {
+    margin-left: 10px;
+  }
+
+  .icons img {
+    height: 30px;
+    width: 30px;
+  }
+
+
+  @media (max-width: 495px) {
+    .summary-panel {
+      min-width: 90%;
+    }
+  }
+
+
+  .format_unavailable path {
+    stroke: grey;
+  }
+
+  .format_unavailable circle {
+    stroke: grey;
+  }
+
+
+  .format_unavailable:hover path,
+  .format_unavailable:active path {
+    stroke: grey;
+  }
+
+  .format_unavailable:hover circle,
+  .format_unavailable:active circle {
+    stroke: grey;
+  }
+
+
+  {% endstyle %}
+
+{% endunless %}
+

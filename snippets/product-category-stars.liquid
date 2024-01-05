@@ -1,0 +1,29 @@
+<div class="product-text stars-container">
+  <div class="item">{{ product.metafields.jadepuma.category }}</div>
+
+  <!--<div class="feefo-product-stars-widget item" data-product-sku="{{product.id}}" data-parent-product-sku="{{product.id}}"></div>-->
+
+<script type="text/javascript" src="https://api.feefo.com/api/javascript/MERCHANTID" async></script>
+<!-- <div class="feefo-product-stars-widget 1" data-product-sku="{{product.variants.first.sku}}"></div> -->
+
+    <div class="feefo-product-stars-widget" data-parent-product-sku="{{product.id}}"></div>
+  <!--{% if product.id == 8174336213205 %}
+    <div class="feefo-product-stars-widget {{ product.id }} {{ product.title }}" data-parent-product-sku="44870038290645"></div>
+  {% elsif product.id == 8174339653845 %}
+    <div class="feefo-product-stars-widget {{ product.id }} {{ product.title }}" data-parent-product-sku="44870057263317"></div>
+  {% else %}
+    <div class="feefo-product-stars-widget" data-product-sku="{{product.variants.first.sku}}"></div>
+  {% endif %}-->
+
+  
+</div>
+
+{% style %}
+
+.stars-container {    
+   display: flex;
+   flex-direction: row;
+}
+.item { flex: 1 0 0; }
+
+{% endstyle %}
